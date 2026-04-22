@@ -17,6 +17,11 @@ from azure.ai.ml.entities import (
     TargetUtilizationScaleSettings,
 )
 from azure.identity import DefaultAzureCredential
+from azure.ai.ml.entities import (
+    DataCollector,
+    DeploymentCollection,
+    
+)
  
  
 config_path = os.path.join(os.path.dirname(__file__), "../.azureml/config.json")
@@ -79,6 +84,13 @@ deployment = ManagedOnlineDeployment(
  
     instance_type="Standard_DS2_v2",
     instance_count=1,
+    # To enable data collection for data drift monitoring
+    data_collector=DataCollector(
+        collections={
+            "model_inputs": DeploymentCollection(enabled=True),
+            "model_outputs": DeploymentCollection(enabled=True),
+        }
+    ),
  
     # Give init() time to load model.pkl and feature_columns.json
     # initial_delay of 10 seconds means do not send any requests to model for 10 seconds 
