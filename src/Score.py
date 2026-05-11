@@ -3,6 +3,10 @@ import json
 import joblib
 from predict import build_inference_row
 
+# declared for monkey-patching in tests
+
+MODEL        = None
+FEATURE_COLS = None
 
 def init():
     model_dir = os.environ.get("AZUREML_MODEL_DIR", ".")

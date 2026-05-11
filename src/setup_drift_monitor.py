@@ -31,7 +31,7 @@ ml_client = MLClient.from_config(
     credential=DefaultAzureCredential())
 
 
-ENDPOINT_NAME    = "churn-prediction-endpoint"
+ENDPOINT_NAME    = "churn-predictions-endpoint"
 DEPLOYMENT_NAME  = "champion"
 MONITOR_NAME     = "churn-drift-monitor"
 BASELINE_DATASET = "churn-training-baseline-mltable"
@@ -94,6 +94,11 @@ compute = ServerlessSparkCompute(
     runtime_version="3.4",
 )
 
+#compute = ml_client.compute.get("ComputeCluster1")  # Reuse existing compute cluster
+
+#from azure.ai.ml.entities import AmlCompute
+
+#compute = AmlCompute(name="ComputeCluster1")
 def create_monitor(baseline_uri: str, alert_email: str) -> None:
     
     reference = ReferenceData(
