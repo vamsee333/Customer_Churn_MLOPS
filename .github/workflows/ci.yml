@@ -76,7 +76,7 @@ jobs:
             -v \
             --tb=short
 
-      
+      #
       # 5. Upload coverage report as an artifact so you can download it from
       #    the Actions tab and inspect line-by-line misses
       
